@@ -15,7 +15,7 @@ for tx in 10 100 1000 10000; do
     
     # many-to-many
     for conflict in 0 0.1 0.2 0.5 0.8; do
-        cn=$(echo "$conflict * 100" | bc | cut -d. -f1)
+        cn=$(awk "BEGIN {printf \"%d\", $conflict * 100}")
         ../altius-benchtools/target/release/generate pattern -y m2m \
             -t $tx -c $conflict -o ./transfer/many-to-many/m2m-t${tn}-c${cn}.json
         ../altius-benchtools/target/release/generate pattern -y m2m \
